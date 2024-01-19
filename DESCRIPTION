@@ -1,12 +1,16 @@
 Package: BREAD
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: BREAD (bead readout exploration and data analysis tool)
+Version: 0.0.1.0000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Sophie", "Berube", , "sberube3@jhmi.edu", role = c("aut", "cre"))
+Description: The BREAD (bead readout exploration and data analysis tool) package allows users to load, clean, and perform basic normalization on raw data from Luminex Multiplex Bead Array (MBA) assays across multiple plates. Specifically, the package allows users to visualize bead count distributions and filter observations with low beadcounts using their own threshold. The package allows for background correction either through subtraction or division as well as visualization of standard curves. The user can then fit these standard curves and infer the log concentration of samples using this fit. Finally, the user can perform between-plate normalization using regression and repeated measurements across plates. To evaluate the efficacy of these normalization procedures the user can also compute Lin's Concordance Correlation Coefficient among repeated measurements across plates at various stages of normalization. 
+License: `use_gpl3_license()` 
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.2
+Imports: 
+    DescTools,
+    dplyr,
+    flexfit,
+    ggplot2,
+    tidyr
