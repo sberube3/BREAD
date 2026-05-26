@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_and_tidy.R
 \name{read_and_tidy}
 \alias{read_and_tidy}
-\title{read_and_tidy}
+\title{Read and Tidy}
 \usage{
 read_and_tidy(
   file_name,
@@ -36,33 +36,44 @@ read_and_tidy(
 }
 \value{
 A tidy data frame with where each row represents the measurements assocated with one antigen in one sample. The data frame has 8 columns:
-1-"Location" the plate location of the sample. 2- "Sample" the sample name. 3- "Antigen" the name of the antigen.
-4- "MFI" the mean fluorescence intensity corresponding to the antigen in that sample.
-5- "BeadCount" the number of beads identified by the reader for each antigen in each sample.
+1-"Location" the plate location of the sample.
+2-"Sample" the sample name.
+3-"Antigen" the name of the antigen.
+4-"MFI" the mean fluorescence intensity corresponding to
+the antigen in that sample.
+5-"BeadCount" the number of beads identified by
+the reader for each antigen in each sample.
 6- "Plate" the unique identifier for each plate.
-7- "Sample_Type" one of TestSample designating study samples, StdCurve designating serial dilutions,
-"BG" designating samples that measure background signal, or "Ctrl" designating control samples.
+7- "Sample_Type" one of TestSample designating study samples,
+StdCurve designating serial dilutions,
+"BG" designating samples that measure background signal,
+or "Ctrl" designating control samples.
 }
 \description{
-This function reads in raw csv files from multiplex Luminex experiments and outputs a data frame that can be used by other functions in BREAD to pre-process data.
+Reads in raw luminex data in csv format and outputs a tidy data frame.
 }
 \examples{
-read_and_tidy("2023-08-31_Antoomwe_Plate.csv", plate_number = "1", num_wells=384,
-antigen_names= antigen_names=c("EBA175.RIII.V","Rh5.1","EBA181.RIII.V","gSG6","MSP2.Dd2","GST","Gexp","GLURP.R2","Tet.tox",
-"PfAMA1","MSP2.CH150","EBA140.RIII.V","Rh4.2","PfMSP1.19","HSP40.Ag1","SBP1","PfSEA.1",
+csv_path<- system.file("extdata", "2023-08-31_Antoomwe_Plate.csv", package="BREAD")
+read_and_tidy(csv_path, plate_number = "1", num_wells=384,
+antigen_names=c("EBA175.RIII.V","Rh5.1","EBA181.RIII.V",
+"gSG6","MSP2.Dd2","GST","Gexp","GLURP.R2","Tet.tox",
+"PfAMA1","MSP2.CH150","EBA140.RIII.V","Rh4.2","PfMSP1.19",
+"HSP40.Ag1","SBP1","PfSEA.1",
 "Hyp2","Etramp5.Ag1","Etramp4.Ag2","CSP","Rh2.2030"),
-control_samples = c("Control1","Control2","Control3","Control4","Control5","Control6","Control7"),
+control_samples = c("Control1","Control2","Control3","Control4",
+"Control5","Control6","Control7"),
 background_samples = c("Background0", "empty", "Empty"),
-standard_curve_values = data.frame(Sample=rep(c("Standard1", "Standard2","Standard3","Standard4","Standard5",
+standard_curve_values = data.frame(Sample=rep(c("Standard1",
+"Standard2","Standard3","Standard4","Standard5",
 "Standard6","Standard7","Standard8","Standard9","Standard10"),times=2),
-Dilution= rep(c(1/54, 1/162, 1/486, 1/1458, 1/4374, 1/13122, 1/39366, 1/118098,
-               1/354294,1/1062882), times=2),
+Dilution= rep(c(1/54, 1/162, 1/486, 1/1458, 1/4374, 1/13122,
+          1/39366, 1/118098,1/354294,1/1062882), times=2),
 Location= c("1(1,A1)",    "3(1,C1)",    "5(1,E1)",    "7(1,G1)",
            "9(1,I1)",    "11(1,K1)",   "13(1,M1)",   "15(1,O1)",
            "33(1,A3)",   "35(1,C3)",   "338(1,B22)", "340(1,D22)",
            "342(1,F22)", "344(1,H22)", "346(1,J22)", "348(1,L22)",
            "350(1,N22)", "352(1,P22)", "370(1,B24)", "372(1,D24)"),
-Replicate= rep(c(1,2), each=10))
+Replicate= rep(c(1,2), each=10)),
 bead_threshold = 30)
 
 }
